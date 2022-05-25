@@ -49,6 +49,14 @@ export default class UniqueGen {
 	}
 
 	/**
+   * generateOtpToken
+   */
+	public static async generateOtpToken() {
+		const uniqueRef = await this.generateRandNumber(6);
+		return `${uniqueRef}`;
+	}
+
+	/**
    * generateVerificationToken
    */
 	public static async generateVerificationToken() {

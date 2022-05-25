@@ -6,6 +6,7 @@
  */
 
 import { Request, Response, NextFunction } from "express";
+import { escapeRegExp } from "lodash";
 import sendMail from "../../services/mail";
 
 class Auth {
@@ -30,6 +31,29 @@ class Auth {
 			}
 		});
 		next();
+	}
+
+	/**
+   * Triggered on 200 statusCode
+   * @middleware POST /api/auth/login-customer
+   * onSuccessfulCustomerLoginFromNewDevice
+   */
+	public onSuccessfulCustomerLoginFromNewDevice(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
+		res.on("finish", async () => {
+			// Handle only on 200 statusCode
+			if (res.statusCode === 200 && res.locals.mwData) {
+				const { userDoc, tokenDoc } = res.locals.mwData;
+
+				await sendMail.send(userDoc.email, "verify email", {
+					token: tokenDoc.code,
+					name: userDoc.name,
+				});
+			}
+		});
 	}
 
 	/**

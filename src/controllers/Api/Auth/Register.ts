@@ -1,7 +1,6 @@
 /**
  * @author Oyetunji Atilade <atiladeoyetunji@gmail.com>
  * @desc Register new User
-   @desc  POST /api/Users
    @access Public
  */
 
