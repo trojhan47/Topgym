@@ -1,5 +1,5 @@
 # React build
-client/build/
+frontend/build/
 
 # OS files
 .DS_Store

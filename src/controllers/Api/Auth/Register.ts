@@ -122,8 +122,9 @@ class Register {
 		// Check if user exists
 		const userExists = await User.findOne({ email });
 		if (userExists) {
-			res.status(400);
-			throw new Error("User already Exists");
+			res.status(400).json({
+				message: "user already exists",
+			});
 		}
 
 		// Create role for Users
@@ -207,6 +208,60 @@ class Register {
 
 		res.status(200).json({
 			message: "Please verify your phone email",
+		});
+	}
+
+	/**
+   * @desc Verify user account
+   * customerAccountVerification
+   */
+	public async customerAccountVerification(req: Request, res: Response) {
+		const { code = "" } = req.body;
+		let tokenDoc;
+		let userDoc;
+		let updatedUserDoc;
+
+		if (!code) {
+			return res.redirect("/error/bad-token");
+		}
+
+		try {
+			tokenDoc = await Token.findOne({
+				code,
+				expiresAt: { $gt: new Date() },
+			});
+
+			userDoc = await User.findOne({
+				_id: tokenDoc?.user,
+			});
+		} catch (error: any) {
+			return res.redirect("/error/500");
+		}
+
+		if (!tokenDoc) {
+			return res.redirect("/error/bad-token");
+		}
+
+		if (!userDoc) {
+			return res.redirect("/error/user-not-found");
+		}
+
+		try {
+			updatedUserDoc = await User.updateOne(
+				{ _id: tokenDoc?.user },
+				{ $set: { isEmailVerified: true, active: true } },
+				{ runValidators: true }
+			);
+		} catch (error: any) {
+			return res.status(500).json({ message: error.message });
+		}
+		if (!updatedUserDoc) {
+			res.status(400).json({
+				message: "Unable to verify User",
+			});
+		}
+		return res.status(200).json({
+			message: "Account verified",
 		});
 	}
 }

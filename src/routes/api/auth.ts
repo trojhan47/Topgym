@@ -2,6 +2,7 @@ import { Router } from "express";
 import AuthMw from "../../middlewares/Routes/Auth";
 import RegisterCtr from "../../controllers/Api/Auth/Register";
 import ResetCtr from "../../controllers/Api/Auth/resetPassword";
+import LoginCtr from "../../controllers/Api/Auth/Login";
 
 const router = Router();
 
@@ -10,7 +11,17 @@ router.post(
 	AuthMw.onSuccessfulCustomerRegistration,
 	RegisterCtr.customer
 );
-router.post("signin-customer");
+
+router.post("/verify-email", RegisterCtr.customerAccountVerification);
+router.post(
+	"/signin-customer",
+	AuthMw.onSuccessfulCustomerLoginFromNewDevice,
+	LoginCtr.customer
+);
+router.post(
+	"/signin-customer/verify-newdevice-login",
+	LoginCtr.verifyNewDeviceLogin
+);
 router.post(
 	"/request-reset-password-link",
 	AuthMw.onRequestLink,

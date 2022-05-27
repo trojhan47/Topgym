@@ -38,7 +38,7 @@ class Auth {
    * @middleware POST /api/auth/login-customer
    * onSuccessfulCustomerLoginFromNewDevice
    */
-	public onSuccessfulCustomerLoginFromNewDevice(
+	public static async onSuccessfulCustomerLoginFromNewDevice(
 		req: Request,
 		res: Response,
 		next: NextFunction
@@ -54,6 +54,7 @@ class Auth {
 				});
 			}
 		});
+		next();
 	}
 
 	/**
