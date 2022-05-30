@@ -58,7 +58,7 @@ class Auth {
 	}
 
 	/**
-   * onResetPassword
+   * on request ResetPassword link
    */
 	public static onRequestLink(req: Request, res: Response, next: NextFunction) {
 		res.on("finish", async () => {
@@ -68,6 +68,30 @@ class Auth {
 				const { userDoc, tokenDoc, link } = res.locals.mwData;
 
 				await sendMail.send(userDoc.email, "reset password", {
+					token: tokenDoc.code,
+					name: userDoc.name,
+					link,
+				});
+			}
+		});
+		next();
+	}
+
+	/**
+   * on request ChangeEmail link
+   */
+	public static onRequestChangeEmailLink(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
+		res.on("finish", async () => {
+			// called only on 200 statusCode
+
+			if (res.statusCode === 200) {
+				const { userDoc, tokenDoc, link } = res.locals.mwData;
+
+				await sendMail.send(userDoc.email, "change email", {
 					token: tokenDoc.code,
 					name: userDoc.name,
 					link,
