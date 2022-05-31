@@ -1,0 +1,36 @@
+$primary_1: #000000;
+$primary_2: #43e0cb;
+$primary_3: #ffffff;
+$font_size: 16px;
+$display_1: flex;
+$display_2: grid;
+
+.topHeader {
+  text-align: center;
+}
+
+.section1 {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-top: 50px;
+}
+
+.gridContainer {
+  margin-top: 5%;
+  display: $display_2;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 150px;
+}
+
+.Button {
+  margin-top: 15px;
+  font-weight: bold;
+  border-radius: 3px;
+  text-align: center;
+  width: 10rem;
+}
+
+.iconContainer {
+  display: $display_1;
+  flex-direction: column;
+}

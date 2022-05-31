@@ -2,7 +2,7 @@ import React from "react";
 // import { Button } from "antd";
 // import { connect } from "react-redux";
 import logo from "../../logo.svg";
-import "../../App.css";
+import "../../App.less";
 
 // const App: FC = () => (
 //   <div className="App">
