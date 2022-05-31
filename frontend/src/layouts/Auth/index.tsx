@@ -1,6 +1,7 @@
 import React from "react";
-import { Layout } from "antd";
 import classNames from "classnames";
+import { Layout, Row, Col } from "antd";
+
 import style from "./style.module.scss";
 
 type AuthLayoutProps = {
@@ -14,21 +15,20 @@ function AuthLayout({ children }: AuthLayoutProps) {
         <div
           className={classNames(`${style.container}`)}
           style={{
-            backgroundImage: `${process.env.PUBLIC_URL}/resources/images/logo.png`,
+            backgroundImage: `${process.env.PUBLIC_URL}/resources/images/Vector.svg`,
           }}
         >
-          <div className={classNames(`${style.topbar}`)}>
-            <div className={style.logoContainer}>
-              <div className={style.logo}>
-                <img
-                  src={`${process.env.PUBLIC_URL}/resources/images/logo.png`}
-                  className="mr-2"
-                  alt="top-gym-auth"
-                  width={150}
-                />
-              </div>
-            </div>
-          </div>
+          <Row className={`${style["p-header"]} w-100`}>
+            <Col className={style.logo}>
+              <img
+                src={`${process.env.PUBLIC_URL}/resources/images/Vector.svg`}
+                className="mr-2 "
+                alt="top-gym-public"
+                width={40}
+              />
+              <div className={style.logoText}>TopGym</div>
+            </Col>
+          </Row>
 
           <div className={style.containerInner}>{children}</div>
         </div>
