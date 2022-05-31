@@ -10,71 +10,96 @@ import { escapeRegExp } from "lodash";
 import sendMail from "../../services/mail";
 
 class Auth {
-	/**
+  /**
    * onSuccessfulCustomerRegistration
    */
-	public static onSuccessfulCustomerRegistration(
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) {
-		res.on("finish", async () => {
-			// called only on 200 statusCode
+  public static onSuccessfulCustomerRegistration(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    res.on("finish", async () => {
+      // called only on 200 statusCode
 
-			if (res.statusCode === 200) {
-				const { user, token } = res.locals.mwData;
+      if (res.statusCode === 200) {
+        const { user, token } = res.locals.mwData;
 
-				await sendMail.send(user.email, "verify email", {
-					token: token.code,
-					name: user.name,
-				});
-			}
-		});
-		next();
-	}
+        await sendMail.send(user.email, "verify email", {
+          token: token.code,
+          name: user.name,
+        });
+      }
+    });
+    next();
+  }
 
-	/**
+  /**
    * Triggered on 200 statusCode
    * @middleware POST /api/auth/login-customer
    * onSuccessfulCustomerLoginFromNewDevice
    */
-	public onSuccessfulCustomerLoginFromNewDevice(
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) {
-		res.on("finish", async () => {
-			// Handle only on 200 statusCode
-			if (res.statusCode === 200 && res.locals.mwData) {
-				const { userDoc, tokenDoc } = res.locals.mwData;
+  public static onSuccessfulCustomerLoginFromNewDevice(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    res.on("finish", async () => {
+      // Handle only on 200 statusCode
+      if (res.statusCode === 200 && res.locals.mwData) {
+        const { userDoc, tokenDoc } = res.locals.mwData;
 
-				await sendMail.send(userDoc.email, "verify email", {
-					token: tokenDoc.code,
-					name: userDoc.name,
-				});
-			}
-		});
-	}
+        await sendMail.send(userDoc.email, "verify email", {
+          token: tokenDoc.code,
+          name: userDoc.name,
+        });
+      }
+    });
+    next();
+  }
 
-	/**
-   * onResetPassword
+  /**
+   * on request ResetPassword link
    */
-	public static onRequestLink(req: Request, res: Response, next: NextFunction) {
-		res.on("finish", async () => {
-			// called only on 200 statusCode
+  public static onRequestLink(req: Request, res: Response, next: NextFunction) {
+    res.on("finish", async () => {
+      // called only on 200 statusCode
 
-			if (res.statusCode === 200) {
-				const { userDoc, tokenDoc, link } = res.locals.mwData;
+      if (res.statusCode === 200) {
+        const { userDoc, tokenDoc, link } = res.locals.mwData;
 
-				await sendMail.send(userDoc.email, "reset password", {
-					token: tokenDoc.code,
-					name: userDoc.name,
-					link,
-				});
-			}
-		});
-		next();
-	}
+        await sendMail.send(userDoc.email, "reset password", {
+          token: tokenDoc.code,
+          name: userDoc.name,
+          link,
+        });
+      }
+    });
+    next();
+  }
+
+  /**
+   * on request ChangeEmail link
+   */
+  public static onRequestChangeEmailLink(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    res.on("finish", async () => {
+      // called only on 200 statusCode
+
+      if (res.statusCode === 200) {
+        const { userDoc, tokenDoc, link } = res.locals.mwData;
+
+        await sendMail.send(userDoc.email, "change email", {
+          token: tokenDoc.code,
+          name: userDoc.name,
+          link,
+        });
+      }
+    });
+    next();
+  }
 }
 
 export default Auth;
