@@ -1,9 +1,30 @@
 import { Router } from "express";
 
-const router = Router();
+import Statics from "../../middlewares/Statics";
+import ClientAppCtr from "../../controllers/Web";
 
-router.get("/", (req, res) => {
-	return res.status(200).send("success");
-});
+const router = Router();
+router.use(Statics.clientStatic);
+
+router.get(
+	[
+		"/",
+		"/dashboard",
+		"/auth/signup",
+		"/auth/login",
+		"/about",
+		"/contact",
+		"/subscription",
+		"/auth/passwordRequest",
+		"/auth/passwordReset",
+		"/error404",
+		"/error500",
+		"/profile",
+		"/settings",
+		"/paymentHistory",
+		"/terms",
+	],
+	ClientAppCtr.sendClient
+);
 
 export default router;

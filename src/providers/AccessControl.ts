@@ -4,7 +4,7 @@ import Role, { TRoleDoc } from "../models/Role";
 import { IPermissions, IPermission } from "../interfaces/models/role";
 import Log from "../middlewares/Log";
 
-class AccessControlPovider {
+class AccessControlProvider {
 	public ac: AccessControl;
 
 	constructor(grantList: object[]) {
@@ -55,15 +55,15 @@ class AccessControlPovider {
 	public async reset() {
 		this.ac.reset();
 
-		this.ac.setGrants(await AccessControlPovider.getGrantList());
+		this.ac.setGrants(await AccessControlProvider.getGrantList());
 	}
 }
 
 const instantiateAC = (async () => {
-	const grantList = await AccessControlPovider.getGrantList();
+	const grantList = await AccessControlProvider.getGrantList();
 	// Log.info(`${JSON.stringify(grantList, null, 4)}`);
 
-	return new AccessControlPovider(grantList);
+	return new AccessControlProvider(grantList);
 })();
 
 export default instantiateAC;

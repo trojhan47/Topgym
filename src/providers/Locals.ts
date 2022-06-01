@@ -33,6 +33,7 @@ type config = {
 	paystackSecretKeyTest: string;
 	paystackSecretKeyLive: string;
 	expoAccessToken: string;
+	companyEmail: string;
 };
 
 class Locals {
@@ -67,6 +68,8 @@ class Locals {
 		const redisPassword = process.env.REDIS_PASSWORD || "set your password";
 
 		const companyName = process.env.COMPANY_NAME || "Topgym";
+		const companyEmail =
+			process.env.COMPANY_EMAIL || "thedigitalagencyltd@gmail.com";
 		const companyDomain = process.env.COMPANY_DOMAIN || "";
 
 		const bucketEndpoint = process.env.BUCKET_ENDPOINT || "";
@@ -126,6 +129,7 @@ class Locals {
 			paystackSecretKeyTest,
 			paystackSecretKeyLive,
 			expoAccessToken,
+			companyEmail,
 		};
 	}
 

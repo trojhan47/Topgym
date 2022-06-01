@@ -63,7 +63,6 @@ class ChangeEmail {
 			tokenDoc,
 			link,
 		};
-		// res.send(res.locals.user);
 		return res.status(200).json({
 			message: "Your change email link has been sent to your registered email",
 		});

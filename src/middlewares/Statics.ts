@@ -15,11 +15,11 @@ class Statics {
 		return app;
 	}
 
-	/* public static clientStatic = express.static(
-    path.join(__dirname, "../../client/build"),
-    {
-      fallthrough: true,
-    }
-  ); */
+	public static clientStatic = express.static(
+		path.join(__dirname, "../../frontend/build"),
+		{
+			fallthrough: true,
+		}
+	);
 }
 export default Statics;
