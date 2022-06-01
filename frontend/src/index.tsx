@@ -1,5 +1,6 @@
-import "antd/lib/style/index.less";
-// import "./components/kit/vendors/antd/themes/default.less";
+// import "antd/lib/style/index.less";
+import "antd/dist/antd.less";
+import "./components/vendors/antd/themes/default.less";
 // import './components/kit/vendors/antd/themes/dark.less'
 import "./global.scss";
 import "./index.css";

@@ -54,7 +54,11 @@ const BootstappedLayout: React.FC<{
 
   // Layout Rendering
   const getLayout = () => {
-    if (["/", "/about", "/contact", "terms"].includes(pathname)) {
+    if (
+      ["/", "/about", "/contact", "terms", "/error404", "/error500"].includes(
+        pathname
+      )
+    ) {
       return "public";
     }
     if (/^\/auth(?=\/|$)/i.test(pathname)) {
