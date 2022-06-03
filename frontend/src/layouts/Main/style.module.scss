@@ -1,4 +1,9 @@
 // @import "components/mixins.scss";
+$primary_1: #000000;
+$primary_2: #43e0cb;
+$primary_3: #ffffff;
+$font_size: 16px;
+$display_1: flex;
 
 .container {
   width: 100%;
@@ -42,20 +47,22 @@
   // }
 }
 
-.logoContainer {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  padding: 0 rem(28) 0 0;
 
   .logo {
-    display: flex;
-    flex-direction: row;
+    display: $display_1;
     align-items: center;
-    height: rem(24);
-    white-space: nowrap;
-    width: 100%;
+    margin: auto;
+    width: auto;
   }
+
+  .logoText {
+    color: $primary_3;
+    padding-left: 5px;
+    font-size:larger;
+    font-weight: bold;
+  }
+
+
   .name {
     font-size: rem(20);
     font-weight: 700;
@@ -74,13 +81,22 @@
     border-left: 1px solid /* $gray-2 */;
     font-size: rem(14);
   }
-}
+
 
 .footerNav {
   li {
     margin: rem(5) rem(14);
   }
 }
+
+
+
+
+
+
+
+
+
 
 // dark theme
 [data-kit-theme="dark"] {
