@@ -20,15 +20,11 @@ module.exports = {
           "@input-color": "@primary-1",
           "@input-placeholder-color": "@primary-1",
           "@input-padding": "8px 12px",
-          "@menu-dark-inline-submenu-item-color": "#FFFF00",
-          "@menu-dark-inline-submenu-item-bg": "@primary-1",
-          "@menu-item-color": "@primary-1",
           "@menu-item-font-size": "16px",
+          "@menu-item-active-color": "@text-color",
+          "@menu-inline-submenu-bg": "@primary-1",
           "@select-background": "@primary-color-opaque",
           "@select-dropdown-bg": "@primary-1",
-          "@select-item-color": "@text-color",
-          "@select-item-font-size": "16px",
-          "@select-item-padding": "8px 12px",
         },
         lessLoaderOptions: {
           lessOptions: {

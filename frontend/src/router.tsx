@@ -41,7 +41,7 @@ const routes = [
     Component: lazy(() => import("./pages/Contact")),
   },
   {
-    path: "/subscription",
+    path: "/auth/subscription",
     key: "/subscription",
     Component: lazy(() => import("./pages/Subscription")),
   },

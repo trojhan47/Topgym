@@ -1,0 +1,22 @@
+.ant-menu-item,
+.ant-menu-submenu {
+  background-color: black !important;
+}
+
+.ant-menu-item {
+  &-selected::after {
+    border: unset !important;
+  }
+
+  &-active {
+    border: unset !important;
+  }
+
+  &:hover::after {
+    border: unset !important;
+  }
+}
+
+.ant-menu-vertical {
+  border: unset !important;
+}
