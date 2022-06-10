@@ -17,8 +17,9 @@ router.use("/auth", auth);
 router.get("/sub", Passport.isAuthenticated, SubCtr.price);
 router.post(
 	"/contactUs",
-	[Passport.isAuthenticated, ContactMdw.onSuccessfulContactUsMessage],
+	ContactMdw.onSuccessfulContactUsMessage,
 	ContactCtr.send
 );
+router.post("/addSub", SubCtr.createSubscription);
 
 export default router;
