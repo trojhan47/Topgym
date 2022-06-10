@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Select, Button, Space, Row, Col, Divider } from "antd";
+import { Form, Select, Button, Space, Row, Col } from "antd";
 
 import style from "./style.module.scss";
 
@@ -34,7 +34,7 @@ const index = () => (
     <Col
       xs={24}
       lg={12}
-      className="border border-warning d-flex flex-column align-items-center text-center "
+      className="d-flex flex-column align-items-center text-center "
     >
       <div className="d-flex justify-contents-center align-items-center p-5 mt-5">
         <img
