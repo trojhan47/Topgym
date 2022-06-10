@@ -10,7 +10,6 @@ import {
   ContactsFilled,
 } from "@ant-design/icons";
 
-import style1 from "../About/style.module.scss";
 import style from "./style.module.scss";
 
 const onFinish = (values: any) => {
@@ -22,9 +21,9 @@ const onFinishFailed = (errorInfo: any) => {
 };
 
 const index = () => (
-  <div className={style1.container}>
+  <div className="text-black">
     <div className={style.section1}>
-      <h2 className={style1.heading}>Get in Touch!</h2>
+      <h2>Get in Touch!</h2>
       <p>Contact us, help us serve you better</p>
     </div>
     <div className={style.gridContainer}>
@@ -36,7 +35,6 @@ const index = () => (
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
-          className={style.forms}
         >
           <Space direction="vertical" size="middle">
             <Form.Item
@@ -105,18 +103,18 @@ const index = () => (
                 }
               />
             </Form.Item>
-          </Space>
 
-          <Form.Item wrapperCol={{ span: 24 }}>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className={style.Button}
-              style={{ padding: "10px", height: "40px" }}
-            >
-              Submit
-            </Button>
-          </Form.Item>
+            <Form.Item wrapperCol={{ span: 24 }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className={style.Button}
+                style={{ padding: "10px", height: "40px" }}
+              >
+                Submit
+              </Button>
+            </Form.Item>
+          </Space>
         </Form>
       </div>
       <div className={style.iconContainer}>

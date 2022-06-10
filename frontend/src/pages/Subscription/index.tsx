@@ -1,8 +1,6 @@
 import React from "react";
-import { Form, Select, Button, Space, Row, Col } from "antd";
+import { Form, Select, Button, Space, Row, Col, Divider } from "antd";
 
-import aboutStyle from "../About/style.module.scss";
-import contactStyle from "../Contact/style.module.scss";
 import style from "./style.module.scss";
 
 const { Option } = Select;
@@ -20,30 +18,38 @@ const handleChange = (value: string) => {
 };
 
 const index = () => (
-  <Row className={style.subRow}>
-    <Col xs={0} sm={0} md={0} lg={12} className={style.leftCol}>
-      <img
-        className={style.image}
-        alt="subBackground"
-        width={400}
-        height={500}
-        src={`${process.env.PUBLIC_URL}/resources/images/couple_workout.png`}
-      />
+  <Row className="vh-100">
+    <Col xs={0} lg={12} className="h-100 w-100">
+      <div className="d-flex h-100">
+        <img
+          style={{
+            backgroundImage: `${process.env.PUBLIC_URL}/resources/images/couple_workout.png`,
+          }}
+          alt="subBackground"
+          className="img-fluid"
+          src={`${process.env.PUBLIC_URL}/resources/images/couple_workout.png`}
+        />
+      </div>
     </Col>
-    <Col xs={24} sm={24} md={24} lg={12} className={style.formContainer}>
-      <div className={style.flex}>
+    <Col
+      xs={24}
+      lg={12}
+      className="border border-warning d-flex flex-column align-items-center text-center "
+    >
+      <div className="d-flex justify-contents-center align-items-center p-5 mt-5">
         <img
           src={`${process.env.PUBLIC_URL}/resources/images/Vector.svg`}
           alt="topgymIcon"
+          className="img-fluid"
           width={40}
         />
-        <h2 className={style.header}>TopGym</h2>
+        <h2 className="h4">TopGym</h2>
       </div>
-
-      <div className={style.header}>
-        <h2 className={style.hText}>Subscribe to enjoy our amazing Features</h2>
+      <div className="h2 text-black">
+        <h2 className="h3 p-3">
+          Subscribe to any of our plans, to enjoy our amazing Features
+        </h2>
       </div>
-
       <Form
         name="basic"
         wrapperCol={{ span: 24 }}
@@ -97,6 +103,32 @@ const index = () => (
       </Form>
     </Col>
   </Row>
+
+  //   <Col xs={24} lg={12}>
+  //     <div className="d-flex justify-content-center">
+  //       <img
+  //         src={`${process.env.PUBLIC_URL}/resources/images/Vector.svg`}
+  //         alt="topgymIcon"
+  //         className="img-fluid mw-100 h-auto"
+  //       />
+  //       <h2 className={style.header}>TopGym</h2>
+  //     </div>
+  //   </Col>
+  //   <Col xs={24} sm={24} md={24} lg={12} className={style.formContainer}>
+  //     <div className={style.flex}>
+  //       <img
+  //         src={`${process.env.PUBLIC_URL}/resources/images/Vector.svg`}
+  //         alt="topgymIcon"
+  //         width={40}
+  //       />
+  //       <h2 className={style.header}>TopGym</h2>
+  //     </div>
+
+  //
+
+  //
+  //   </Col>
+  // </Row>
 );
 
 export default index;
