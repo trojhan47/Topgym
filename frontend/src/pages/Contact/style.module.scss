@@ -16,13 +16,6 @@ $display_2: grid;
   text-align: center;
 }
 
-.gridContainer {
-  margin-top: 5%;
-  display: $display_2;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 150px;
-}
-
 .Button {
   margin-top: 15px;
   font-weight: bold;
