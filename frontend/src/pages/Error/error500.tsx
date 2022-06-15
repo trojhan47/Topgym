@@ -1,13 +1,11 @@
 import React from "react";
 import { Button } from "antd";
 
-import aboutStyle from "../About/style.module.scss";
-import contactStyle from "../Contact/style.module.scss";
 import style from "./style.module.scss";
 
 const index = () => (
-  <div className={aboutStyle.container}>
-    <div className={contactStyle.section1}>
+  <div className="text-black text-center mt-5">
+    <div>
       <h1 className={style.header}> 500 </h1>
       <p>Internal Service Error! </p>
     </div>
@@ -27,7 +25,7 @@ const index = () => (
       <Button
         type="primary"
         htmlType="submit"
-        className={contactStyle.Button}
+        className="px-5 mt-3"
         style={{ padding: "10px", height: "40px" }}
       >
         GO HOME
