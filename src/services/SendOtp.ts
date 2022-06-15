@@ -1,36 +1,37 @@
-// import Locals from "../providers/Locals";
-// import Log from "../middlewares/Log";
-// import { SmsCommandContext } from "twilio/lib/rest/supersim/v1/smsCommand";
+/* import Locals from "../providers/Locals";
+import Log from "../middlewares/Log";
+import { SmsCommandContext } from "twilio/lib/rest/supersim/v1/smsCommand";
 
-// class SendOtpCode {
+class SendOtpCode {
 
-//   const { userDoc, tokenDoc } = ;
+	const { userDoc, tokenDoc } = {userDoc: {}, tokenDoc: {code: 474848}};
 
-//   const message = `${tokenDoc.code} is your OTP code for signing in into your Topgym account`;
-//   const fromTelephone = Locals.config().twilioMessagingServiceSid;
+	const message = `${tokenDoc.code} is your OTP code for signing in into your Topgym account`;
+	// const fromTelephone = Locals.config().twilioMessagingServiceSid;
 
-//   try {
-//     const sentMessage = await SmsCommandContext.send(
-//       userDoc.telephone,
-//       message,
-//       fromTelephone,
-//       messagingServiceSid
-//     );
+	try {
+		const sentMessage = await SmsCommandContext.send(
+			userDoc.telephone,
+			message,
+			fromTelephone,
+			messagingServiceSid
+		);
 
-//     if (!sentMessage) {
-//       throw new Error(`could not send OTP to ${userDoc.telephone}` );
+		if (!sentMessage) {
+			throw new Error(`could not send OTP to ${userDoc.telephone}` );
 
-//     }
+		}
 
-//     Log.info(`${sentMessage.sid}`)
-//   } catch (error: any) {
-//     Log.error(`${error.message}`);
+		Log.info(`${sentMessage.sid}`)
+	} catch (error: any) {
+		Log.error(`${error.message}`);
 
-//     throw new Error(`Unhandled error in sendOtp processor: ${error.message}`);
+		throw new Error(`Unhandled error in sendOtp processor: ${error.message}`);
 
-//   }
+	}
 
-//   return { status: "ok" };
-// }
+	return { status: "ok" };
+}
 
-// export default new SendOtpCode();
+export default new SendOtpCode();
+ */

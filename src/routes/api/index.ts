@@ -1,8 +1,10 @@
 import { Router } from "express";
 import auth from "./auth";
+import user from "./user";
+import staff from "./staff";
 import Log from "../../middlewares/Log";
-import SubCtr from "../../controllers/Api/Auth/Subscription";
-import ContactCtr from "../../controllers/Api/Auth/ContactUs";
+import Staff from "../../controllers/Api/Subscription";
+import ContactCtr from "../../controllers/Api/ContactUs";
 import Passport from "../../providers/Passport";
 import ContactMdw from "../../middlewares/Routes/Contact";
 
@@ -14,12 +16,12 @@ router.get("/", (req, res) => {
 });
 
 router.use("/auth", auth);
-router.get("/sub", Passport.isAuthenticated, SubCtr.price);
+router.use("/user", user);
+router.use("/staff", staff);
 router.post(
 	"/contactUs",
 	ContactMdw.onSuccessfulContactUsMessage,
 	ContactCtr.send
 );
-router.post("/addSub", SubCtr.createSubscription);
 
 export default router;

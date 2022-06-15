@@ -9,10 +9,10 @@ import { customAlphabet } from "nanoid";
 
 export default class UniqueGen {
 	/**
-   * @description Unique reference Generator function
-   * generateUniqueRef
-   * @param {string} label
-   */
+	 * @description Unique reference Generator function
+	 * generateUniqueRef
+	 * @param {string} label
+	 */
 	private static async generateUniqueRef(label?: string, length?: number) {
 		const nanoid = customAlphabet(
 			"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -33,32 +33,32 @@ export default class UniqueGen {
 	}
 
 	/**
-   * generateCustomerRef
-   */
+	 * generateCustomerRef
+	 */
 	public static async generateCustomerRef() {
 		const uniqueRef = await this.generateUniqueRef("CUS");
 		return uniqueRef;
 	}
 
 	/**
-   * generateSlugToken
-   */
+	 * generateSlugToken
+	 */
 	public static async generateSlugToken() {
 		const uniqueRef = await this.generateUniqueRef(undefined, 9);
 		return uniqueRef;
 	}
 
 	/**
-   * generateOtpToken
-   */
+	 * generateOtpToken
+	 */
 	public static async generateOtpToken() {
 		const uniqueRef = await this.generateRandNumber(6);
 		return `${uniqueRef}`;
 	}
 
 	/**
-   * generateVerificationToken
-   */
+	 * generateVerificationToken
+	 */
 	public static async generateVerificationToken() {
 		const uniqueRef = await this.generateRandNumber(4);
 		return `${uniqueRef}`;

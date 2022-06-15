@@ -2,7 +2,7 @@ import { Router } from "express";
 import AuthMw from "../../middlewares/Routes/Auth";
 import RegisterCtr from "../../controllers/Api/Auth/Register";
 import LoginCtr from "../../controllers/Api/Auth/Login";
-import ResetCtr from "../../controllers/Api/Auth/resetPassword";
+import ResetCtr from "../../controllers/Api/Auth/ResetPassword";
 import ChangeEmailCtr from "../../controllers/Api/Auth/ChangeEmail";
 import Passport from "../../providers/Passport";
 

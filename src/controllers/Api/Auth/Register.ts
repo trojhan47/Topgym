@@ -18,13 +18,13 @@ import Log from "../../../middlewares/Log";
 
 class Register {
 	/**
-   * Register new users
-   * @route POST /api/auth/signup-customer
-   */
+	 * Register new users
+	 * @route POST /api/auth/signup-customer
+	 */
 
 	/**
-   * customer
-   */
+	 * customer
+	 */
 	public async customer(req: Request, res: Response) {
 		const type = "Customer";
 		const { name, email, password, confirmPassword, telephone } = req.body;
@@ -173,7 +173,7 @@ class Register {
 
 		// Generate customerRef
 
-		const customRef = await Gen.generateCustomerRef;
+		const customRef = await Gen.generateCustomerRef();
 
 		// Create Customer
 
@@ -212,9 +212,9 @@ class Register {
 	}
 
 	/**
-   * @desc Verify user account
-   * customerAccountVerification
-   */
+	 * @desc Verify user account
+	 * customerAccountVerification
+	 */
 	public async customerAccountVerification(req: Request, res: Response) {
 		const { code = "" } = req.body;
 		let tokenDoc;

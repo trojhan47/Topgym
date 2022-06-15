@@ -3,16 +3,17 @@ import ISubscription from "../interfaces/models/subscription";
 
 export type SubscriptionDocument = mongoose.Document & ISubscription;
 
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
 export const SubscriptionSchema = new mongoose.Schema({
 	name: { type: String, required: true },
-	sub: {
-		duration: { type: String, required: true },
-		amount: { type: String, required: true },
+	duration: { type: Number, required: true }, // Stored in days
+	type: {
+		type: String,
+		required: true,
+		enum: ["single", "couple", "corporate"],
 	},
-	/*	amount: { type: Number, required: true },
-	duration: { type: String, required: true },
-	createdAt: { type: Date, default: Date.now },
-	*/
+	amount: { type: String, required: true },
 });
 
 const Subscription = mongoose.model<SubscriptionDocument>(
