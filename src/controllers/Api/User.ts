@@ -1,3 +1,10 @@
+/**
+ * @author Oyetunji Atilade <atiladeoyetunji@gmail.com>
+ * @desc subscription pricing
+ * @access Public
+ *
+ */
+
 import { Request, Response } from "express";
 import validator from "validator";
 
@@ -169,6 +176,59 @@ class UserCtr {
 		}
 
 		return Promise.resolve(userDoc);
+	}
+
+	/**
+	 * updateAccount
+	 */
+	public static async updateAccount(req: Request, res: Response) {
+		const { userRef } = res.locals.user;
+		const files = req.files;
+		const { name = "" } = req.body;
+
+		let userDoc: any;
+		// let promises: any;
+		// let uploadResponse: any;
+		try {
+			userDoc = await User.findOne({
+				_id: new ObjectId(userRef),
+			});
+		} catch (error: any) {
+			return res.status(500).json({ message: error.message });
+		}
+
+		if (
+			["string"].includes(typeof name) ||
+			!validator.isEmpty(name, { ignore_whitespace: true })
+		) {
+			userDoc.name = name;
+		}
+		/*
+		if (Array.isArray(files) && files.length > 0) {
+			try {
+				promises = (files as []).map(async (file: any) => {
+					uploadResponse = await MediaUtil.createOne({
+						file,
+						ownerRef: userDoc._id,
+						ownerModel: "User",
+						category: "avatar",
+					});
+
+					if (file.fieldname === "avatar") {
+						userDoc[file.fieldname] = uploadResponse._id;
+					}
+
+					return uploadResponse;
+				});
+				await Promise.all(promises);
+
+				await userDoc.save();
+			} catch (error: any) {
+				return res.status(500).json({ message: error.message });
+			}
+		}
+		return res.status(200).json({ message: "message" });
+		*/
 	}
 }
 

@@ -18,6 +18,12 @@ class Staff {
 	public static async createSubscription(req: Request, res: Response) {
 		const { name, amount, duration, type } = req.body;
 
+		if (!name.startsWith(`${type}`)) {
+			return res
+				.status(300)
+				.json({ message: "name must start with type of subscription" });
+		}
+
 		try {
 			const sub = await Sub.create({
 				name,
@@ -56,11 +62,12 @@ class Staff {
 	 * getSubscriptionByType
 	 */
 	public static async getSubscriptionByType(req: Request, res: Response) {
-		// const type = req.body;
-		const query = { type: req.body };
+		const { type = "" } = req.body;
 
 		try {
-			const sub = Sub.find(query);
+			const sub = await Sub.find({
+				type,
+			});
 			if (sub) {
 				res.status(200).json(sub);
 			} else {

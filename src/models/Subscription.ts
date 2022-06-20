@@ -10,8 +10,8 @@ export const SubscriptionSchema = new mongoose.Schema({
 	duration: { type: Number, required: true }, // Stored in days
 	type: {
 		type: String,
-		required: true,
 		enum: ["single", "couple", "corporate"],
+		required: true,
 	},
 	amount: { type: String, required: true },
 });
