@@ -17,9 +17,9 @@ import Locals from "../../../providers/Locals";
 
 class ResetPassword {
 	/**
-   *  Request a Reset Password Link.
-   *  @Route POST /api/auth/request-reset-password-link
-   */
+	 *  Request a Reset Password Link.
+	 *  @Route POST /api/auth/request-reset-password-link
+	 */
 
 	public static async requestLink(req: Request, res: Response) {
 		const { email = "" } = req.body;
@@ -99,10 +99,10 @@ class ResetPassword {
 	}
 
 	/**
-   * Verify a User token from the request reset link.
-   * @route GET/api/auth/verify-request-password-token/:code
-   * verifyToken
-   */
+	 * Verify a User token from the request reset link.
+	 * @route GET/api/auth/verify-request-password-token/:code
+	 * verifyToken
+	 */
 	public static async verifyToken(req: Request, res: Response) {
 		const { code = "" } = req.params;
 		let tokenDoc;
@@ -140,10 +140,10 @@ class ResetPassword {
 	}
 
 	/**
-   * Resets the password after verifying token
-   * reset
-   * @route POST /api/auth/reset-password
-   */
+	 * Resets the password after verifying token
+	 * reset
+	 * @route POST /api/auth/reset-password
+	 */
 	public static async reset(req: Request, res: Response) {
 		const { tokenRef = "" } = req.cookies;
 		const { password = "", confirmPassword = "" } = req.body;

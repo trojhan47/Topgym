@@ -4,13 +4,11 @@
    @desc  POST /api/Users
    @access Public
  */
-
-import { customAlphabet } from "nanoid";
+import { customAlphabet } from "nanoid/async";
 
 export default class UniqueGen {
 	/**
 	 * @description Unique reference Generator function
-	 * generateUniqueRef
 	 * @param {string} label
 	 */
 	private static async generateUniqueRef(label?: string, length?: number) {
@@ -20,47 +18,89 @@ export default class UniqueGen {
 		);
 
 		const ref = await nanoid(length);
+
 		if (!label) {
 			return `${ref}`;
 		}
+
 		return `${label}_${ref}`;
 	}
 
 	private static async generateRandNumber(length?: number) {
-		const nanoid = customAlphabet("1234567890", 10);
+		const nanoid = customAlphabet("1234567890", 11);
+
 		const ref = await nanoid(length);
+
 		return `${ref}`;
 	}
 
-	/**
-	 * generateCustomerRef
-	 */
 	public static async generateCustomerRef() {
 		const uniqueRef = await this.generateUniqueRef("CUS");
 		return uniqueRef;
 	}
 
-	/**
-	 * generateSlugToken
-	 */
-	public static async generateSlugToken() {
-		const uniqueRef = await this.generateUniqueRef(undefined, 9);
+	public static async generateDriverRef() {
+		const uniqueRef = await this.generateUniqueRef("DRV");
 		return uniqueRef;
 	}
 
-	/**
-	 * generateOtpToken
-	 */
-	public static async generateOtpToken() {
-		const uniqueRef = await this.generateRandNumber(6);
-		return `${uniqueRef}`;
+	public static async generatePartnerRef() {
+		const uniqueRef = await this.generateUniqueRef("PTR");
+		return uniqueRef;
 	}
 
-	/**
-	 * generateVerificationToken
-	 */
+	public static async generateStaffRef() {
+		const uniqueRef = await this.generateUniqueRef("STF");
+		return uniqueRef;
+	}
+
 	public static async generateVerificationToken() {
-		const uniqueRef = await this.generateRandNumber(4);
-		return `${uniqueRef}`;
+		const token = await this.generateRandNumber(6);
+		return token;
+	}
+
+	public static async generateOtpToken() {
+		const token = await this.generateRandNumber(4);
+		return token;
+	}
+
+	public static async generateTransactionRef() {
+		const uniqueRef = await this.generateUniqueRef("T");
+		return uniqueRef;
+	}
+
+	public static async generatePaystackRef() {
+		const uniqueRef = await this.generateUniqueRef("PSK");
+		return uniqueRef;
+	}
+
+	public static async generateDriverLicenseVerificationRef() {
+		const uniqueRef = await this.generateUniqueRef("DLV");
+		return uniqueRef;
+	}
+
+	public static async generateDriverCompanyVerificationRef() {
+		const uniqueRef = await this.generateUniqueRef("DCV");
+		return uniqueRef;
+	}
+
+	public static async generatePartnerCompanyVerificationRef() {
+		const uniqueRef = await this.generateUniqueRef("PCV");
+		return uniqueRef;
+	}
+
+	public static async generateTripRef() {
+		const uniqueRef = await this.generateUniqueRef("PCV", 9);
+		return uniqueRef;
+	}
+
+	public static async generateSlugToken() {
+		const token = await this.generateUniqueRef(undefined, 6);
+		return token;
+	}
+
+	public static async generateFileKey() {
+		const uniqueRef = await this.generateUniqueRef(undefined, 15);
+		return uniqueRef;
 	}
 }

@@ -11,8 +11,11 @@ import validator from "validator";
 import mongoose from "../../providers/Database";
 
 import User from "../../models/User";
+
 import MediaDBQuery from "../../queries/Media";
 import RoleDBQuery from "../../queries/Role";
+
+import MediaUtil from "../../utils/Media";
 import Log from "../../middlewares/Log";
 
 const ObjectId = mongoose.Types.ObjectId;
@@ -120,6 +123,7 @@ class UserCtr {
 	 * @param userRef
 	 * @returns  userDoc/ error
 	 */
+
 	private static async getCustomerAccount(userRef: any) {
 		let userDoc: any;
 
@@ -187,8 +191,8 @@ class UserCtr {
 		const { name = "" } = req.body;
 
 		let userDoc: any;
-		// let promises: any;
-		// let uploadResponse: any;
+		let promises: any;
+		let uploadResponse: any;
 		try {
 			userDoc = await User.findOne({
 				_id: new ObjectId(userRef),
@@ -203,7 +207,7 @@ class UserCtr {
 		) {
 			userDoc.name = name;
 		}
-		/*
+
 		if (Array.isArray(files) && files.length > 0) {
 			try {
 				promises = (files as []).map(async (file: any) => {
@@ -228,7 +232,6 @@ class UserCtr {
 			}
 		}
 		return res.status(200).json({ message: "message" });
-		*/
 	}
 }
 

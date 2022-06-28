@@ -2,6 +2,8 @@ import { Router } from "express";
 import auth from "./auth";
 import user from "./user";
 import staff from "./staff";
+import payment from "./payment";
+import role from "./role";
 import Log from "../../middlewares/Log";
 import Staff from "../../controllers/Api/Subscription";
 import ContactCtr from "../../controllers/Api/ContactUs";
@@ -17,7 +19,9 @@ router.get("/", (req, res) => {
 
 router.use("/auth", auth);
 router.use("/user", user);
+router.use("/payment", payment);
 router.use("/staff", staff);
+router.use("/role", role);
 router.post(
 	"/contactUs",
 	ContactMdw.onSuccessfulContactUsMessage,

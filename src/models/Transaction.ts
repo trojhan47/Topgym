@@ -1,24 +1,22 @@
 import mongoose from "../providers/Database";
 import ITransaction from "../interfaces/models/transaction";
 
-export type TransactionDocument = mongoose.Document & ITransaction;
+export type TTransactionDoc = mongoose.Document & ITransaction;
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 export const TransactionSchema = new mongoose.Schema({
-	user: { type: ObjectId, ref: "User", required: true, unique: true },
-	type: { type: String, enum: ["debit", "credit"], required: true },
-
-	email: { type: String, required: true },
 	ref: { type: String, required: true, unique: true },
-
-	amount: { type: String, required: true },
-	paystackRef: { type: String, required: true },
+	type: { type: String, enum: ["debit", "credit"], required: true },
+	account: { type: ObjectId, refPath: "accountType", required: true },
+	accountType: { type: String, required: true, enum: ["Customer", "credit"] },
+	paystackRef: { type: String },
+	amount: { type: Number, required: true }, // in Kobo
 	meta: { type: mongoose.Schema.Types.Mixed },
 	createdAt: { type: Date, default: Date.now },
 });
 
-const Transaction = mongoose.model<TransactionDocument>(
+const Transaction = mongoose.model<TTransactionDoc>(
 	"Transaction",
 	TransactionSchema
 );

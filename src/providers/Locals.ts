@@ -21,6 +21,11 @@ type config = {
 	redisPassword: string;
 	companyName: string;
 	companyDomain: string;
+	topgymBucketEndpoint: string;
+	topgymBucketSubdomainEndpoint: string;
+	bucketSecret: string;
+	bucketKey: string;
+	bucketRegion: string;
 	mailtrapUsername: string;
 	mailtrapPassword: string;
 	mailtrapHost: string;
@@ -76,9 +81,9 @@ class Locals {
 		const topgymBucketEndpoint = process.env.TOPGYM_BUCKET_ENDPOINT || "";
 		const topgymBucketSubdomainEndpoint =
 			process.env.TOPGYM_BUCKET_SUBDOMAIN_ENDPOINT || "";
-		const bucketRegion = process.env.BUCKET_REGION || "";
-		const bucketKey = process.env.BUCKET_KEY || "";
-		const bucketSecret = process.env.BUCKET_SECRET || "";
+		const bucketRegion = process.env.AWS_BUCKET_REGION || "";
+		const bucketKey = process.env.AWS_ACCESS_KEY || "";
+		const bucketSecret = process.env.AWS_SECRET_KEY || "";
 
 		const mailtrapUsername = process.env.MAILTRAP_USERNAME || "";
 		const mailtrapPassword = process.env.MAILTRAP_PASSWORD || "";
@@ -115,6 +120,11 @@ class Locals {
 			redisPort,
 			redisHost,
 			redisPassword,
+			topgymBucketEndpoint,
+			topgymBucketSubdomainEndpoint,
+			bucketSecret,
+			bucketKey,
+			bucketRegion,
 			companyName,
 			companyDomain,
 			mailtrapUsername,
