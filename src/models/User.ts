@@ -29,11 +29,33 @@ export const UserSchema = new mongoose.Schema({
 		required: true,
 		lowercase: true,
 	},
+	nextOfKin: {
+		type: String,
+		lowercase: true,
+		trim: true,
+	},
 	telephone: {
 		type: String,
 		unique: true,
 		trim: true,
 		lowercase: true,
+	},
+	nextOfKinTelephone: {
+		type: String,
+		unique: true,
+		trim: true,
+		lowercase: true,
+	},
+	address: {
+		type: String,
+		trim: true,
+		lowercase: true,
+	},
+	age: {
+		type: Number,
+	},
+	dateOfBirth: {
+		type: Date,
 	},
 	subscriptionStatus: {
 		type: String,
@@ -52,6 +74,11 @@ export const UserSchema = new mongoose.Schema({
 	type: {
 		type: String,
 		enum: ["Customer", "Staff"],
+		required: true,
+	},
+	gender: {
+		type: String,
+		enum: ["Male", "Female"],
 		required: true,
 	},
 	googleRef: {

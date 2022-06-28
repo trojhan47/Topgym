@@ -11,23 +11,39 @@ import moment from "moment";
 
 import User from "../../../models//User";
 import Gen from "../../../utils/Gen";
+import Age from "../../../utils/Age";
 import UserRole from "../../../models/Role";
 import Customer from "../../../models/Customer";
 import Token from "../../../models/Token";
+import Role from "../../../models/Role";
 import Log from "../../../middlewares/Log";
 
 class Register {
 	/**
-   * Register new users
-   * @route POST /api/auth/signup-customer
-   */
+	 * Register new users
+	 * @route POST /api/auth/signup-customer
+	 */
 
 	/**
-   * customer
-   */
+	 * customer
+	 */
 	public async customer(req: Request, res: Response) {
 		const type = "Customer";
-		const { name, email, password, confirmPassword, telephone } = req.body;
+		const {
+			name,
+			email,
+			password,
+			confirmPassword,
+			telephone,
+			gender,
+			dateOfBirth,
+			nextOfKin,
+			nextOfKinTelephone,
+			address,
+		} = req.body;
+
+		let roleDoc;
+		let age;
 
 		// check for empty name field
 		if (validator.isEmpty(name, { ignore_whitespace: true })) {
@@ -40,6 +56,46 @@ class Register {
 		if (typeof name !== "string") {
 			return res.status(400).json({
 				message: "Name should be a string",
+			});
+		}
+		// check for empty address field
+		if (validator.isEmpty(address, { ignore_whitespace: true })) {
+			return res.status(400).json({
+				message: " address field cannot be blank",
+			});
+		}
+
+		// check for bad  address type
+		if (typeof address !== "string") {
+			return res.status(400).json({
+				message: "address should be a string",
+			});
+		}
+		// check for empty nextOfKin field
+		if (validator.isEmpty(nextOfKin, { ignore_whitespace: true })) {
+			return res.status(400).json({
+				message: " nextOfKin field cannot be blank",
+			});
+		}
+
+		// check for bad  nextOfKin type
+		if (typeof nextOfKin !== "string") {
+			return res.status(400).json({
+				message: "Name should be a string",
+			});
+		}
+
+		// check for empty gender field
+		if (validator.isEmpty(gender, { ignore_whitespace: true })) {
+			return res.status(400).json({
+				message: " gender field cannot be blank",
+			});
+		}
+
+		// check for bad  gender type
+		if (typeof gender !== "string") {
+			return res.status(400).json({
+				message: "gender should be a string",
 			});
 		}
 
@@ -98,6 +154,27 @@ class Register {
 			});
 		}
 
+		// check for empty dateOfBirth field
+		if (validator.isEmpty(dateOfBirth, { ignore_whitespace: true })) {
+			return res.status(400).json({
+				message: "dateOfBirth cannot be blank",
+			});
+		}
+
+		// check for bad dateOfBirth type
+		if (!["string"].includes(typeof dateOfBirth)) {
+			return res.status(400).json({
+				message: "dateOfBirth should be a string",
+			});
+		}
+
+		// Check for bad dateOfBirth type
+		if (!validator.isDate(dateOfBirth)) {
+			return res.status(400).json({
+				message: "invalid date type",
+			});
+		}
+
 		// check for empty telephone field
 		if (validator.isEmpty(telephone, { ignore_whitespace: true })) {
 			return res.status(400).json({
@@ -118,6 +195,43 @@ class Register {
 				message: "Invalid telephone",
 			});
 		}
+		// check for empty nextOfKinTelephone field
+		if (validator.isEmpty(nextOfKinTelephone, { ignore_whitespace: true })) {
+			return res.status(400).json({
+				message: "nextOfKinTelephone cannot be blank",
+			});
+		}
+
+		// check for bad nextOfKinTelephone type
+		if (!["string"].includes(typeof nextOfKinTelephone)) {
+			return res.status(400).json({
+				message: "nextOfKinTelephone should be a string",
+			});
+		}
+		// Check for invalid nextOfKinTelephone number
+
+		if (
+			!validator.isMobilePhone(nextOfKinTelephone, ["en-NG"], {
+				strictMode: true,
+			})
+		) {
+			return res.status(400).json({
+				message: "Invalid nextOfKinTelephone",
+			});
+		}
+
+		// ensure role exists with type === "Customer"
+		try {
+			roleDoc = await Role.findOne({ type: "Customer" });
+		} catch (error: any) {
+			return res.status(500).json({ message: error.message });
+		}
+
+		if (!roleDoc) {
+			return res
+				.status(400)
+				.json({ message: "No Role exists for customer yet. Contact Support." });
+		}
 
 		// Check if user exists
 		const userExists = await User.findOne({ email });
@@ -126,12 +240,14 @@ class Register {
 				message: "user already exists",
 			});
 		}
-
+		age = Age.getAge(dateOfBirth);
+		/*
 		// Create role for Users
 		const userRole = await UserRole.create({
 			name: type,
 			type,
 		});
+		*/
 
 		// Create User
 
@@ -150,6 +266,12 @@ class Register {
 			email,
 			type,
 			telephone,
+			gender,
+			dateOfBirth,
+			age,
+			nextOfKin,
+			nextOfKinTelephone,
+			address,
 			// username:email,
 		});
 
@@ -173,15 +295,15 @@ class Register {
 
 		// Generate customerRef
 
-		const customRef = await Gen.generateCustomerRef;
+		const customRef = await Gen.generateCustomerRef();
 
 		// Create Customer
 
 		const customer = await Customer.create({
 			user: user._id,
-			name: userRole.name,
+			name: roleDoc.name,
 			ref: customRef,
-			role: userRole._id,
+			role: roleDoc._id,
 		});
 		if (!customer) {
 			return res.status(500).json({
@@ -212,9 +334,9 @@ class Register {
 	}
 
 	/**
-   * @desc Verify user account
-   * customerAccountVerification
-   */
+	 * @desc Verify user account
+	 * customerAccountVerification
+	 */
 	public async customerAccountVerification(req: Request, res: Response) {
 		const { code = "" } = req.body;
 		let tokenDoc;

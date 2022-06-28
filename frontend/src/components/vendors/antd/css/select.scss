@@ -1,3 +1,23 @@
 .ant-select {
   color: black !important;
+
+  &-selector {
+    height: 45px !important;
+  }
+
+  &-selection-item {
+    padding-top: 6px !important;
+  }
+  &-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: #43e0cb !important;
+  }
+  &-item {
+    color: black !important;
+  }
+  &-dropdown {
+    background-color: white !important;
+  }
+  &-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: white !important;
+  }
 }

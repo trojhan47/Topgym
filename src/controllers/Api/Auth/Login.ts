@@ -33,10 +33,10 @@ class Login {
 		.createClient();
 
 	/**
-   * Signin a Customer
-   * @route POST /api/auth/signin-customer
-   * customer
-   */
+	 * Signin a Customer
+	 * @route POST /api/auth/signin-customer
+	 * customer
+	 */
 	public static async customer(
 		req: Request,
 		res: Response,
@@ -153,6 +153,13 @@ class Login {
 						return res.status(500).json({ message: error.message });
 					}
 
+					// prepare res.locals variables
+
+					res.locals.user = {
+						userRef: user._id,
+						userType: user.type,
+					};
+
 					return res.status(200).json({
 						message: "successfully logged in",
 						accessToken,
@@ -192,9 +199,9 @@ class Login {
 	}
 
 	/**
-   * Verify Token to prove user owns new device.
-   * @route POST /api/auth/verify-signin-token/:code
-   */
+	 * Verify Token to prove user owns new device.
+	 * @route POST /api/auth/verify-signin-token/:code
+	 */
 	public static async verifyNewDeviceLogin(req: Request, res: Response) {
 		const { code = "" } = req.body;
 		let tokenDoc;
@@ -307,10 +314,7 @@ class Login {
 				userType: userDoc.type,
 				role: ["Customer"].includes(userDoc.type)
 					? customerDoc.role
-					: /*					: ["Staff"].includes(userDoc.type)
-					? staffDoc.role
-          */
-						staffDoc.role,
+					: staffDoc.role,
 				customerRef: customerDoc ? customerDoc._id : undefined,
 				// staffRef: staffDoc ? staffDoc._id : undefined,
 			};
@@ -365,10 +369,15 @@ class Login {
 		} catch (error: any) {
 			return res.status(500).json({ message: error.message });
 		}
+		res.locals.user = {
+			userRef: userDoc._id,
+			userType: userDoc.type,
+		};
 
 		return res.status(200).json({
 			message: "successfully logged in",
 			accessToken,
+			userType: userDoc.type,
 		});
 	}
 }

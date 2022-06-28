@@ -32,17 +32,11 @@ export const RoleSchema = new mongoose.Schema({
 		required: true,
 	},
 	permissions: {
-		location: PermissionSchema,
 		category: PermissionSchema,
 		customer: PermissionSchema,
-		driver: PermissionSchema,
-		request: PermissionSchema,
-		partner: PermissionSchema,
 		role: PermissionSchema,
 		staff: PermissionSchema,
-		trip: PermissionSchema,
 		user: PermissionSchema,
-		vehicle: PermissionSchema,
 		payment: PermissionSchema,
 	},
 });

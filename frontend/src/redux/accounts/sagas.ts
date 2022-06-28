@@ -1,7 +1,7 @@
-import { all, takeEvery, put, select } from "redux-saga/effects";
+import { all, takeEvery, put, select, call } from "redux-saga/effects";
 // import { notification } from "antd";
 
-// import { json } from "stream/consumers";
+// import { signup } from "../../services/api/auth";
 import actions from "./actions";
 
 /* 
@@ -48,10 +48,6 @@ export function* REGISTER({ payload }: { payload: any }) {
 
   const { loading } = yield select((state) => state.account);
 
-  if (resetStates) {
-    resetStates();
-  }
-
   yield put({
     type: actions.SET_STATE,
     payload: {
@@ -62,17 +58,13 @@ export function* REGISTER({ payload }: { payload: any }) {
     },
   });
 
-  // const success: { message: string } | false = yield call(
-  //   use jwt outright
-  // payload
-  // );
+  // const success: { message: string } | false = yield call(signup, payload);
 
-  // if (success) {
-  //   if (resetStates) {
-  //     resetStates();
-  //   }
-
-  // }
+  /* if (success) {
+    if (resetStates) {
+      resetStates();
+    }
+   } */
 
   yield put({
     type: actions.SET_STATE,

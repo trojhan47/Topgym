@@ -17,6 +17,7 @@ export interface IPermissions {
 	role: IPermission;
 	staff: IPermission;
 	billing: IPermission;
+	payment: IPermission;
 }
 
 export interface IRole {

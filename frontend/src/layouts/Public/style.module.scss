@@ -27,12 +27,6 @@ $display_1: flex;
   // }
 }
 
-.containerInner {
-  max-width: 32rem;
-  width: auto;
-  margin: auto;
-}
-
 .p-header {
   background-color: $primary_1;
   font-size: $font_size;
@@ -49,27 +43,8 @@ $display_1: flex;
   padding-left: 10px;
 }
 
-.navCol {
-  display: $display_1;
-  align-items: center;
-  justify-content: end;
-}
-
-.listItems {
-  color: $primary_3;
-  display: $display_1;
-  align-items: center;
-  justify-content: flex-end;
-  margin: 0;
-}
-
-li {
-  list-style-type: none;
-  margin-left: 15px;
-}
-
 .button {
-  background-color: $primary_2;
+  border: 1px solid $primary_2;
   border-radius: 10px;
-  padding: 8px 12px;
+  padding: 4px 10px;
 }
